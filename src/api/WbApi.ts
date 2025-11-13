@@ -1,10 +1,9 @@
-import axiosClient from "../../src/utils/axios/axiosClient.js";
 import env from "#config/env/env.js";
+import axiosClient from "#utils/axios/axiosClient.ts";
 
 const axiosInstance = axiosClient;
 
-// перезаписываем baseURL и токен в каждом запросе
-const wbApi = axiosInstance.interceptors.request.use((config: any) => {
+axiosInstance.interceptors.request.use((config: any) => {
     config.baseURL = "https://common-api.wildberries.ru/api/v1";
     config.headers = {
         ...config.headers,
@@ -13,4 +12,4 @@ const wbApi = axiosInstance.interceptors.request.use((config: any) => {
     return config;
 });
 
-export default wbApi;
+export default axiosInstance;
