@@ -1,28 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,
-        "module": "NodeNext",
         "target": "es2017",
+        "module": "NodeNext",
+        "moduleResolution": "Node",
+        "strict": true,
         "esModuleInterop": true,
         "allowJs": true,
         "checkJs": true,
         "skipLibCheck": true,
         "rootDir": "./src",
         "outDir": "./dist",
+        "baseUrl": "./src",
         "paths": {
-            "#*": [
-                "./src/*",
-                "./dist/*"
-            ]
-        }
+            "#*": ["*"]
+        },
+        "allowImportingTsExtensions": true
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.js",
-    ],
-    "exclude": [
-        "node_modules",
-        "src/**/*.test.*",
-        "src/**/*.spec.*"
-    ]
+    "include": ["src/**/*.ts", "src/**/*.js"],
+    "exclude": ["node_modules", "src/**/*.test.*", "src/**/*.spec.*"]
 }
