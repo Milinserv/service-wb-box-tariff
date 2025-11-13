@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es2017",
+        "target": "es2020",
         "module": "NodeNext",
-        "moduleResolution": "Node",
+        "moduleResolution": "NodeNext",
         "strict": true,
         "esModuleInterop": true,
         "allowJs": true,
