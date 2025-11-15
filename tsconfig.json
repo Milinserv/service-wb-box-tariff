@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es2020",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "target": "es2017",
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "strict": true,
         "esModuleInterop": true,
         "allowJs": true,
@@ -12,10 +12,19 @@
         "outDir": "./dist",
         "baseUrl": "./src",
         "paths": {
-            "#*": ["*"]
+            "#api/*": ["api/*"],
+            "#config/*": ["config/*"],
+            "#postgres/*": ["postgres/*"],
+            "#services/*": ["services/*"],
+            "#types/*": ["types/*"],
+            "#utils/*": ["utils/*"],
+            "#secrets/*": ["secrets/*"]
         },
-        "allowImportingTsExtensions": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "resolveJsonModule": true
     },
     "include": ["src/**/*.ts", "src/**/*.js"],
-    "exclude": ["node_modules", "src/**/*.test.*", "src/**/*.spec.*"]
+    "exclude": ["node_modules"]
 }
