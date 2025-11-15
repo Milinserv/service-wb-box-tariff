@@ -1,5 +1,5 @@
 import env from "#config/env/env.js";
-import axiosClient from "#utils/axios/axiosClient.ts";
+import axiosClient from "#utils/axios/axiosClient.js";
 
 const axiosInstance = axiosClient;
 
