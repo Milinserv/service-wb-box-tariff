@@ -1,4 +1,4 @@
-import db from "#postgres/knex.ts";
+import db from "#postgres/knex.js";
 
 /**
  * Сохраняет тарифы WB в БД
@@ -8,32 +8,33 @@ import db from "#postgres/knex.ts";
  * @param data - JSON данные тарифов
  */
 const saveTariffs = async (data: any): Promise<void> => {
-    const today = new Date().toISOString().slice(0, 10);
+    const today :string = new Date().toISOString().slice(0, 10);
+
+    // Извлекаем массив тарифов
+    const tariffs :any = data?.response?.data?.warehouseList ?? [];
 
     await db.transaction(async (trx: any) => {
-        // Сохраняем копию в историю
+        // Сохраняем полные данные в историю
         await trx("wb_tariffs_history").insert({ data });
 
-        // Проверяем, есть ли запись на текущий день
         const existing = await trx("wb_tariffs_daily")
-            .where({
-                date: today
-            }).first();
+            .where({ date: today })
+            .first();
 
         if (existing) {
-            // Обновляем существующую запись
+            // Обновляем запись
             await trx("wb_tariffs_daily")
-                .where({
-                    date: today
-                }).update({
-                    data, updated_at: trx.fn.now()
+                .where({ date: today })
+                .update({
+                    data: JSON.stringify(tariffs),
+                    updated_at: trx.fn.now()
                 });
         } else {
             // Вставляем новую запись
             await trx("wb_tariffs_daily")
                 .insert({
                     date: today,
-                    data,
+                    data: JSON.stringify(tariffs)
                 });
         }
     });
