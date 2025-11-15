@@ -1,11 +1,11 @@
-import wbApi from "#api/WbApi.ts";
-import { WBTariffsResponse } from "#types/tariff.ts";
+import wbApi from "#api/WbApi.js";
+import { WBTariffsResponse } from "#types/tariff.js";
 import logger from "#utils/logger/logger.js";
 
 /**
  * Получает тарифы Wildberries (короба)
  */
-export async function getBoxTariffs(): Promise<WBTariffsResponse | null> {
+const getBoxTariffs = async () :Promise<WBTariffsResponse | null>=> {
     try {
         const dateParam = new Date().toISOString().split("T")[0];
 
@@ -17,13 +17,12 @@ export async function getBoxTariffs(): Promise<WBTariffsResponse | null> {
         return response.data;
     } catch (error: any) {
         if (error.response) {
-            logger.error(
-                { status: error.response?.status, data: error.response?.data },
-                "WB API error"
-            );
+            logger.info("WB API error; status = " + error.response?.status + 'data = ' + error.response?.data);
         } else {
-            console.error("WB API network error:", error.message);
+            logger.info("WB API network error: " + error.message);
         }
         return null;
     }
 }
+
+export default getBoxTariffs;
