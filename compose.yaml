@@ -52,6 +52,10 @@ services:
       context: .
       dockerfile: Dockerfile
 
+    volumes:
+      - ./src/secrets:/app/src/secrets:ro
+      - ./src/log:/app/src/log
+
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -63,6 +67,8 @@ services:
 
     ports:
       - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - .env
 
     depends_on:
       postgres:
