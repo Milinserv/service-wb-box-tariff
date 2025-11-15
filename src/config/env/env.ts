@@ -15,7 +15,7 @@ const envSchema = z.object({
 
     WB_API_KEY: z.string().min(1, "WB_API_KEY is required"),
     GOOGLE_SERVICE_ACCOUNT: z.string().default("/secrets/google_sa.json"),
-    SPREADSHEET_IDS: z.string(),
+    SPREADSHEET_ID: z.string(),
     EXPORT_CRON: z.string().default("*/15 * * * *"),
 });
 
@@ -30,8 +30,8 @@ export const env = {
     POSTGRES_PASSWORD: parsed.POSTGRES_PASSWORD,
     POSTGRES_DB: parsed.POSTGRES_DB,
     WB_API_KEY: parsed.WB_API_KEY,
-    GOOGLE_SA: parsed.GOOGLE_SERVICE_ACCOUNT,
-    SPREADSHEET_IDS: parsed.SPREADSHEET_IDS.split(",").filter(Boolean),
+    GOOGLE_SERVICE_ACCOUNT: parsed.GOOGLE_SERVICE_ACCOUNT,
+    SPREADSHEET_ID: parsed.SPREADSHEET_ID,
     EXPORT_CRON: parsed.EXPORT_CRON,
 };
 
